@@ -19,6 +19,18 @@ h1{
   margin: 20px 0;
 }
 
+h3{
+  color: #1b1b32;
+  margin: 12px 0;
+  font-size: 30px;
+}
+
+h4{
+  color: #1b1b32;
+  margin: 12px 0;
+  font-size: 20px;
+}
+
 .aplicacion-menu{
   display: flex;
   flex-wrap: wrap;

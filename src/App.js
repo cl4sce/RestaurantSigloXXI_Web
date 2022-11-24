@@ -8,6 +8,7 @@ import DetallePedido from './componentes/DetallePedido';
 function App() {
   return (
     <div className="App">
+        
         <Navbar />
         <Routes>
           <Route path="/" element={<Menu />} />

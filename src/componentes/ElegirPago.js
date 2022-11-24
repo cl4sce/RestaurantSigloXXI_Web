@@ -7,6 +7,10 @@ import CreditCard from '@mui/icons-material/CreditCard';
 import AttachMoney from '@mui/icons-material/AttachMoney';
 import ModalEfectivo from './ModalEfectivo';
 import ModalTarjeta from './ModalTarjeta';
+//import { obtenerTotales } from './TableDetalle'; 
+
+//let total = obtenerTotales(invoiceTotal);
+//console.log(total);
 
 const cardEfect = (
   <React.Fragment>

@@ -9,10 +9,11 @@ import Paper from '@mui/material/Paper';
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const TAX_RATE = 0.19;
+const TAX_RATE = 0.10;
 
 function ccyFormat(num) {
-  return `${num.toFixed(2)}`;
+  //return `${num.toFixed(0)}`;
+  return `${new Intl.NumberFormat('de-DE').format(num)}`;
 }
 
 function priceRow(qty, unit) {
@@ -24,30 +25,26 @@ function createRow(desc, qty, unit) {
   return { desc, qty, unit, price };
 }
 
-function subtotal(items) {
-  return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
+function subtotal(sub) {
+  return sub.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
 }
-
 
 export default function DetallePedido() {
 
-  const [ platos , setPlatos] = useState([]);
+  const [ detalle , setDetalle] = useState([]);
 
   useEffect(()=>{
-      const obtenerPlato = async() =>{
-          const API_PLATO_URL = "https://g96da999b89fb17-restaurantedb.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/platos/2";
-          const result = await axios.get(API_PLATO_URL);
-          //console.log(result.data);
-          setPlatos(result.data);
+      const obtenerDetalle = async() =>{
+          const API_DETALLE_URL = "https://g96da999b89fb17-restaurantedb.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/detalle_pedido/";
+          const result = await axios.get(API_DETALLE_URL);
+          setDetalle(result.data.items);
       } 
-      obtenerPlato()
-
+      obtenerDetalle()
   },[]);
 
-  const rows = [
-    createRow(platos.nombre, 2, platos.precio_plato),
-    
-  ];
+  const rows = detalle.map((det) =>
+      createRow(det.nombre_plato, det.cantidad , det.total),
+  );
   
   //createRow('Palitos de ajo', 1, 3000),
   //createRow('Bebida', 2, 2000),
@@ -55,6 +52,10 @@ export default function DetallePedido() {
   const invoiceSubtotal = subtotal(rows);
   const invoiceTaxes = TAX_RATE * invoiceSubtotal;
   const invoiceTotal = invoiceTaxes + invoiceSubtotal;
+
+  /*function obtenerTotales(invoiceTotal, invoiceSubtotal){
+    return {invoiceTotal , invoiceSubtotal};
+  }*/
 
   return (
     <TableContainer component={Paper}>
@@ -78,23 +79,23 @@ export default function DetallePedido() {
             <TableRow key={row.desc}>
               <TableCell>{row.desc}</TableCell>
               <TableCell align="right">{row.qty}</TableCell>
-              <TableCell align="right">{row.unit}</TableCell>
-              <TableCell align="right">{ccyFormat(row.price)}</TableCell>
+              <TableCell align="right">${ccyFormat(row.unit)}</TableCell>
+              <TableCell align="right">${ccyFormat(row.price)}</TableCell>
             </TableRow>
           ))}
           <TableRow>
             <TableCell rowSpan={3} />
             <TableCell colSpan={2}>Subtotal</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
+            <TableCell align="right">${ccyFormat(invoiceSubtotal)}</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell>IVA</TableCell>
+            <TableCell>Propina sugerida</TableCell>
             <TableCell align="right">{`${(TAX_RATE * 100).toFixed(0)} %`}</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
+            <TableCell align="right">${ccyFormat(invoiceTaxes)}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell colSpan={2}>Total</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
+            <TableCell align="right">${ccyFormat(invoiceTotal)}</TableCell>
           </TableRow>
         </TableBody>
       </Table>

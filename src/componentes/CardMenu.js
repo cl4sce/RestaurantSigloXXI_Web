@@ -33,10 +33,8 @@ export default function CardMenu({id,titulo, precio, descripcion}) {
     setExpanded(!expanded);
   };
 
-  console.log("id_card"+id);
-
   return (
-    <Card key={id} sx={{ maxWidth: 345 }}>
+    <Card key={id} sx={{ maxWidth: 210 , minWidth: 210 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -53,7 +51,7 @@ export default function CardMenu({id,titulo, precio, descripcion}) {
       />
       <CardMedia
         component="img"
-        height="194"
+        height="170"
         image={imagenComida}
         alt="Comida"
       />
@@ -64,7 +62,7 @@ export default function CardMenu({id,titulo, precio, descripcion}) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <ModalMenu id_modal ={id} />
+        <ModalMenu id_mod ={id} tit = {titulo} prec = {precio} desc  = {descripcion} />
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}

@@ -12,6 +12,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import {Link} from 'react-router-dom';
+import logoRestaurant from '../imagenes/logo-restaurante3.png';
 
 const pages = ['/Menu', '/DetallePedido', '/Pagar'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -39,7 +41,6 @@ const Navbar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -55,7 +56,11 @@ const Navbar = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            <img 
+                src={logoRestaurant} 
+                width = '90'
+            />
+            Restaurante
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -128,7 +133,7 @@ const Navbar = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src="" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -152,6 +157,7 @@ const Navbar = () => {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
+              <Link className="nav-link" to = '/'>Menú</Link>
             </Menu>
           </Box>
         </Toolbar>

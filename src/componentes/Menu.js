@@ -5,6 +5,7 @@ import '../hojas-de-estilo/CardMenu.css';
 import ElegirMenu from "./ElegirMenu";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { MenuApi } from '../api/PlatoApi.js';
 
 function Menu(){
     const [ platos , setPlatos] = useState([]);
@@ -18,12 +19,14 @@ function Menu(){
         obtenerPlato()
 
     },[]);
+
+    console.log(MenuApi);
     
     return(
         <div>    
             <div className="aplicacion-menu" align="center">
                 <div className="aplicacion-lista-menu" >
-                    <h1>Menú</h1>
+                    <h1>Elegir Menú</h1>
                     <div>
                         <ElegirMenu align="center" />
                     </div>
