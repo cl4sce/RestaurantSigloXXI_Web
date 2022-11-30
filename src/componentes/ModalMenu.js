@@ -44,17 +44,15 @@ export default function ModalMenu({id_mod, tit, prec, desc}) {
     setContador(contador - 1);
   }
 
-  let id_det = 18;
-  let produ = 0;
-  let pago = 0;
-  let total = prec;
+  let id_det = 2;
+  let preci = prec;
   let cant = contador;
-  let mesa = 5;
+  let esta_plat = 1;
   
   //console.log("fecha "+ contador);
   const handleAgregar = async (e) => {
     setOpen(true);
-    const response = await newPedido(id_det,produ,pago,id_mod, mesa, total, cant, tit);
+    const response = await newPedido(id_det,id_mod,cant,preci,tit,esta_plat);
     setAbrir(false);
   };
 

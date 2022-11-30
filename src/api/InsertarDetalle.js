@@ -15,15 +15,13 @@ const API_URL = "https://g96da999b89fb17-restaurantedb.adb.sa-santiago-1.oraclec
   "v_nombre_plato": "<VALUE>"
 }'*/
 
-export const newPedido = async(det, pro, pag, pla, mesa, tot, can  , nom_pla) => {
+export const newPedido = async(det, pla, can, tot, nom_pla, est_pla) => {
     return await axios.post(API_URL , {
         v_id_detalle: det,
-        v_producto: pro,
-        v_pago: pag,
         v_plato: pla,
-        v_mesa: mesa,
-        v_total: tot,
+        v_precio: tot,
         v_cantidad: can,
         v_nombre_plato: nom_pla,
+        v_estado: est_pla,
     });
 }

@@ -43,7 +43,7 @@ export default function DetallePedido() {
   },[]);
 
   const rows = detalle.map((det) =>
-      createRow(det.nombre_plato, det.cantidad , det.total),
+      createRow(det.nombre_plato, det.cantidad , det.precio),
   );
   
   //createRow('Palitos de ajo', 1, 3000),
