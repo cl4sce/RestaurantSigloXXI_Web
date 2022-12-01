@@ -35,7 +35,7 @@ const TablaDetalle = observer(({ store }) => {
   const [detalle, setDetalle] = useState([]);
 
   const getDetallePedido = async () => {
-    const result = await obtenerDetalle(1);
+    const result = await obtenerDetalle(5);
 
     if (result.status === 200) {
       //Setear valor de data en variable

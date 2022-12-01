@@ -26,19 +26,20 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function CardMenu({id,titulo, precio, descripcion}) {
+export default function CardMenu({id,titulo, precio, descripcion,categoria,sigla}) {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+  //console.log(expanded);
   return (
     <Card key={id} sx={{ maxWidth: 210 , minWidth: 210 }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            E
+            {sigla}
           </Avatar>
         }
         action={
@@ -47,7 +48,7 @@ export default function CardMenu({id,titulo, precio, descripcion}) {
           </IconButton>
         }
         title={titulo}
-        subheader="Especiales"
+        subheader={categoria}
       />
       <CardMedia
         component="img"
