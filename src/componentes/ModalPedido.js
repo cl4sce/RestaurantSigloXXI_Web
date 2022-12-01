@@ -7,9 +7,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import List from '@mui/material/List';
-import { insPedido } from '../api/InsertarPedido';
+import { insPedido } from '../api/InsertarPedido.js';
 
-export default function FormDialog() {
+export default function ModalPedido() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -20,15 +20,15 @@ export default function FormDialog() {
     setOpen(false);
   };
 
-  let emple = 2;
-  let mesaas = 5;
+  let emple = 1;
+  let mesaas = 4;
   let pag = 0;
   let tot = 0;
   let est_ped = 1;
 
   const handleInsertar = async (e) => {
-      setOpen(true);
       const response = await insPedido(mesaas,emple,pag,tot,est_ped);
+      setOpen(false);
   };
 
   return (

@@ -14,10 +14,10 @@ const Pagar = observer(({ store }) => {
       <div className="aplicacion-menu">
         <div className="aplicacion-lista-menu">
           <h1>Elegir Medio de Pago</h1>
-          <h1>Total: {ccyFormat(store.totalInvoiceGlobal)}</h1>
           <div align="center">
-            <ElegirPago />
+            <ElegirPago total = {store.totalInvoiceGlobal} />
           </div>
+          <h1>El total a pagar es: ${ccyFormat(store.totalInvoiceGlobal)}</h1>
         </div>
       </div>
     </div>

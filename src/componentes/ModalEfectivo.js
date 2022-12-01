@@ -8,15 +8,36 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import { pagoTotal } from '../api/ActualizarPagoTotal';
 
-export default function FormDialog() {
-  const [open, setOpen] = React.useState(false);
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+export default function ModalEfectivo(topag) {
+  const [abrir, setAbrir] = React.useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setAbrir(true);
   };
+//--------------------CAMBIAR ID DETALLE -------------//
+  let id_pedi = 27;
+  let totaPed = topag['topag']['total'];
 
-  const handleClose = () => {
+  //console.log(totaPed);
+  const handleAactu = async (e) =>{
+    setOpen(true);
+    const response = await pagoTotal(id_pedi, 1,totaPed);
+    setAbrir(false);
+  }
+
+  const [open, setOpen] = React.useState(false);
+  const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
     setOpen(false);
   };
 
@@ -24,11 +45,11 @@ export default function FormDialog() {
     <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       <List component="div" role="group">
       <Button size="small" onClick={handleClickOpen} >Pagar</Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Pago Con efectivo</DialogTitle>
+      <Dialog open={abrir} onClose={handleClose}>
+        <DialogTitle>Pago con efectivo</DialogTitle>
         <DialogContent dividers>
           <DialogContentText>
-            Un garzon se acercara a retirar su dinero.
+            Un garzon se acercara a retirar su dinero. 
           </DialogContentText>
           <TextField
             autoFocus
@@ -42,10 +63,15 @@ export default function FormDialog() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={handleClose}>Aceptar</Button>
+          <Button onClick={handleAactu}>Aceptar</Button>
         </DialogActions>
       </Dialog>
       </List>
+      <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          Se ha notificado al garzón 
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }

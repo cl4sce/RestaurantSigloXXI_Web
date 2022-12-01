@@ -44,7 +44,8 @@ export default function ModalMenu({id_mod, tit, prec, desc}) {
     setContador(contador - 1);
   }
 
-  let id_det = 5;
+//--------------------CAMBIAR ID DETALLE -------------//
+  let id_det = 27;
   let preci = prec;
   let cant = contador;
   let esta_plat = 1;

@@ -10,11 +10,11 @@ import Dialog from '@mui/material/Dialog';
 import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { pagoTotal } from '../api/ActualizarPagoTotal';
 
 const options = [
   'Credito',
-  'Debito',
-  'Otro',
+  'Debito'
 ];
 
 function ModalTarjetaRaw(props) {
@@ -89,7 +89,7 @@ ModalTarjetaRaw.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
-export default function ModalTarjeta() {
+export default function ModalTarjeta(topag) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState('Dione');
 
@@ -104,6 +104,15 @@ export default function ModalTarjeta() {
       setValue(newValue);
     }
   };
+
+  let id_pedi = 28;
+  let totaPed = topag['topag']['total'];
+
+  console.log("targeta "+totaPed);
+  const handleAactu = async (e) =>{
+    const response = await pagoTotal(id_pedi, 2,totaPed);
+    setOpen(false);
+  }
 
   return (
     <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>

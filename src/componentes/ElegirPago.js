@@ -12,39 +12,43 @@ import ModalTarjeta from './ModalTarjeta';
 //let total = obtenerTotales(invoiceTotal);
 //console.log(total);
 
-const cardEfect = (
-  <React.Fragment>
-    <CardContent>
-      <Typography variant="h5" component="div">
-        Efectivo
-      </Typography>
-      <Typography variant="body2">
-        <AttachMoney />
-      </Typography>
-      <Typography>
-        <ModalEfectivo />
-      </Typography>
-    </CardContent>
-  </React.Fragment>
-);
 
-const cardTrans = (
+
+export default function ElegirPago(total) {
+  console.log(total);
+
+  const cardEfect = (
     <React.Fragment>
       <CardContent>
         <Typography variant="h5" component="div">
-          Transbank
+          Efectivo
         </Typography>
         <Typography variant="body2">
-          <CreditCard />
+          <AttachMoney />
         </Typography>
         <Typography>
-          <ModalTarjeta />
+          <ModalEfectivo topag = {total} />
         </Typography>
       </CardContent>
     </React.Fragment>
   );
+  
+  const cardTrans = (
+      <React.Fragment>
+        <CardContent>
+          <Typography variant="h5" component="div">
+            Transbank
+          </Typography>
+          <Typography variant="body2">
+            <CreditCard />
+          </Typography>
+          <Typography>
+            <ModalTarjeta topag = {total}/>
+          </Typography>
+        </CardContent>
+      </React.Fragment>
+    );
 
-export default function ElegirPago() {
   return (
     <div className="row">
         <div className="col-md-6">
